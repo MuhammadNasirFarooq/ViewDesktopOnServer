@@ -65,44 +65,17 @@ public class App
     
     public static void requestMultiPartData() throws ClientProtocolException, IOException{
     	CloseableHttpClient httpClient = HttpClients.createDefault();
-//    	HttpPost uploadFile = new HttpPost("http://172.24.2.122:8080/uploadFile");
-//    	MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-//    	builder.addTextBody("field1", "yes", ContentType.TEXT_PLAIN);
-//
-//    	// This attaches the file to the POST:
-//    	File f = new File("/home/sces122/abc/abc-0.bmp");
-//    	builder.addBinaryBody("uploadfile", new FileInputStream(f), ContentType.APPLICATION_OCTET_STREAM, f.getName() );
-//
-//    	HttpEntity multipart = builder.build();
-//    	uploadFile.setEntity(multipart);
-//    	CloseableHttpResponse response = httpClient.execute(uploadFile);
-//    	HttpEntity responseEntity = response.getEntity();
+    	HttpPost uploadFile = new HttpPost("http://localhost:8080/uploadFile");
+    	MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 
-    	
-//    	HttpEntity entity = MultipartEntityBuilder
-//    		    .create()
-//    		    .addTextBody("number", "5555555555")
-//    		    .addTextBody("clip", "rickroll")
-//    		    .addBinaryBody("uploadfile", new File("/home/sces122/abc/abc-0.bmp"), ContentType.create("application/octet-stream"), "filename")
-//    		    .addTextBody("tos", "agree")
-//    		    .build();
-//
-//    		HttpPost httpPost = new HttpPost("http://172.24.2.122:8080/uploadFile");
-//    		httpPost.setEntity(entity);
-//    		HttpResponse response = httpClient.execute(httpPost);
-//    		HttpEntity result = response.getEntity();
-    		HttpPost httppost = new HttpPost("http://172.24.2.122:8080/uploadFile1");
+    	// This attaches the file to the POST:
+    	File f = new File("C:\\Users\\nasir\\Desktop\\screenshoot.bmp");
+    	builder.addBinaryBody("uploadfile", new FileInputStream(f), ContentType.APPLICATION_OCTET_STREAM, f.getName() );
 
-    		FileBody bin = new FileBody(new File("/home/sces122/abc/abc-0.bmp"));
-    		StringBody comment = new StringBody("A binary file of some kind", ContentType.TEXT_PLAIN);
-
-    		HttpEntity reqEntity = MultipartEntityBuilder.create()
-    		        .addPart("uploadfile", bin)
-    		        .addPart("comment", comment)
-    		        .build();
-
-
-    		httppost.setEntity(reqEntity);
+    	HttpEntity multipart = builder.build();
+    	uploadFile.setEntity(multipart);
+    	CloseableHttpResponse response = httpClient.execute(uploadFile);
+    	HttpEntity responseEntity = response.getEntity();
     	
     }
 }

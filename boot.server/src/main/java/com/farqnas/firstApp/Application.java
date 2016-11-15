@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class Application {
 	@RequestMapping(value = "/")
 	public String demo() {
 
-		return "Hello world!";
+		return "Hello world! : "+env.getProperty("netgloo.paths.uploadedFiles");
 	}
 
 	@RequestMapping(value = "/api/upload", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
@@ -63,7 +64,8 @@ public class Application {
 			// Get the filename and build the local file path
 			String filename = uploadfile.getOriginalFilename();
 			String directory = env.getProperty("netgloo.paths.uploadedFiles");
-			String filepath = Paths.get("/home/sces122/uploads", filename).toString();
+			System.err.println(directory+"#####################");
+			String filepath = Paths.get("C:\\Users\\nasir\\Desktop\\abc", filename).toString();
 
 			// Save the file locally
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filepath)));
