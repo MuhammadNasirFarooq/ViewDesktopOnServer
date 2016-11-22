@@ -1,4 +1,4 @@
-package com.farqnas.firstApp;
+package com.farqnas.upload;
 
 public class User {
 	
